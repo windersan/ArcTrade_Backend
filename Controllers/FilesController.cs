@@ -16,7 +16,7 @@ namespace ArcTrade.Controllers
     {
        
         // GET: api/Files/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}", Name = "GetFile")]
         public FileStreamResult Get(int id)
         {
             FileService svc = new FileService();

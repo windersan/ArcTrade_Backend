@@ -14,45 +14,41 @@ namespace ArcTrade.Controllers
     {
         // GET: api/<controller>
         [HttpGet]
-        public IActionResult Get()
+        public string Get()
         {
-            List<Application> applications = new List<Application>();
-
-            return Ok(applications);
+            return "";
         }
 
-        // GET api/<controller>/5
-        [HttpGet("{id}")]
+        // GET api/<controller>/<userid>
+        [HttpGet("{id}", Name = "GetApplication")]
         public IActionResult Get(int id)
         {
-            Application application = new Application();
+            ApplicationService svc = new ApplicationService();
+            AuthenticationService auth_svc = new AuthenticationService();
 
-            String _ConnectionString = ADO.conn_str;
-            SqlConnection conn = new SqlConnection(_ConnectionString);
-            conn.Open();
-            SqlDataReader reader = null;
-
-            string SqlQuery = "select * from applications where UserId = '" + id + "'";
-            SqlCommand cmd = new SqlCommand(SqlQuery, conn);
-            reader = cmd.ExecuteReader();
-            while (reader.Read())
+            if (auth_svc.Authorize(id))
             {
-                //dt = reader.GetDateTime(0);
+                Application application = svc.GenerateApplication(id);
+
+                return Ok(application);
             }
 
-
-            reader.Close();
-
-            return Ok(application);
+            else
+                return Unauthorized();
         }
 
         // POST api/<controller>
         [HttpPost]
-        public void Post([FromBody]string value)
+        public void Post([FromBody]Application application)
         {
+            ApplicationService svc = new ApplicationService();
+
+            svc.Upload(application);
+
+            return;
         }
 
-        // PUT api/<controller>/5
+        // PUT api/<controller>/<userid>
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] UploadedResume resume)
         {
@@ -60,7 +56,7 @@ namespace ArcTrade.Controllers
             SqlConnection conn = new SqlConnection(_ConnectionString);
             conn.Open();
 
-            string SqlQuery = "update Applications set Resumed = " + resume.Id + " where UserId = " + id;
+            string SqlQuery = "update Applications set ResumeId = " + resume.Id + " where UserId = " + id;
             SqlCommand cmd = new SqlCommand(SqlQuery, conn);
             cmd.ExecuteNonQuery();
 

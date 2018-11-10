@@ -7,21 +7,21 @@ namespace ArcTrade
 {
     public class Application
     {
-        int Id { get; set; }
-        int UserId { get; set; }
-        int ResumeId { get; set; }
-        int Salary { get; set; }
+        public int Id { get; set; }
+        public int UserId { get; set; }
+        public int ResumeId { get; set; }
+        public int Salary { get; set; }
 
-        string FirstName { get; set; }
-        string LastName { get; set; }
-        string Gender { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Gender { get; set; }
 
-        DateTime DateApplied { get; set; }
-        string Job { get; set; }
+        public DateTime DateApplied { get; set; }
+        public string Job { get; set; }
 
-        string Address { get; set; }
-        string City { get; set; }
-        string State { get; set; }
-        string Zip { get; set; }
+        public string Address { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public int Zip { get; set; }
     }
 }
