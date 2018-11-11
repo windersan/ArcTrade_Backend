@@ -12,8 +12,7 @@ namespace ArcTrade
     {
         public MemoryStream Download(int id)
         {
-            String _ConnectionString = ADO.conn_str;
-            SqlConnection conn = new SqlConnection(_ConnectionString);
+            SqlConnection conn = new SqlConnection(ADO.conn_str);
             conn.Open();
 
             string SqlQuery = "select [data] from files where id = " + id;
@@ -40,8 +39,7 @@ namespace ArcTrade
 
         public int Upload(MemoryStream ms)
         {
-            String _ConnectionString = ADO.conn_str;
-            SqlConnection conn = new SqlConnection(_ConnectionString);
+            SqlConnection conn = new SqlConnection(ADO.conn_str);
             conn.Open();
 
             SqlCommand cmd = new SqlCommand("spInsertResume", conn);

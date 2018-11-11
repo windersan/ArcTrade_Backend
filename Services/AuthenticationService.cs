@@ -13,8 +13,7 @@ namespace ArcTrade
         {
             int isValid = 0;  //0 to represent invalid, if it is valid it takes the value of userid
 
-            String _ConnectionString = ADO.conn_str;
-            SqlConnection conn = new SqlConnection(_ConnectionString);
+            SqlConnection conn = new SqlConnection(ADO.conn_str);
             conn.Open();
 
             SqlCommand cmd = new SqlCommand("spAuthenticateUser", conn);
@@ -78,9 +77,9 @@ namespace ArcTrade
             DateTime? dt = null;
             double offset = 0;
 
-            String _ConnectionString = ADO.conn_str;
-            SqlConnection conn = new SqlConnection(_ConnectionString);
+            SqlConnection conn = new SqlConnection(ADO.conn_str);
             conn.Open();
+
             SqlDataReader reader = null;
 
             string SqlQuery = "select timestamp from users where Id = '" + userId + "'";

@@ -52,8 +52,7 @@ namespace ArcTrade.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] UploadedResume resume)
         {
-            String _ConnectionString = ADO.conn_str;
-            SqlConnection conn = new SqlConnection(_ConnectionString);
+            SqlConnection conn = new SqlConnection(ADO.conn_str);
             conn.Open();
 
             string SqlQuery = "update Applications set ResumeId = " + resume.Id + " where UserId = " + id;

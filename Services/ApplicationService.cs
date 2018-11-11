@@ -12,9 +12,9 @@ namespace ArcTrade
         {
             Application application = new Application();
 
-            String _ConnectionString = ADO.conn_str;
-            SqlConnection conn = new SqlConnection(_ConnectionString);
+            SqlConnection conn = new SqlConnection(ADO.conn_str);
             conn.Open();
+
             SqlDataReader reader = null;
 
             string SqlQuery = "select * from applications where UserId = '" + id + "'";
@@ -47,8 +47,7 @@ namespace ArcTrade
         {
             List<int> users = new List<int>();
 
-            String _ConnectionString = ADO.conn_str;
-            SqlConnection conn = new SqlConnection(_ConnectionString);
+            SqlConnection conn = new SqlConnection(ADO.conn_str);
             conn.Open();
             SqlDataReader reader = null;
 
@@ -70,9 +69,9 @@ namespace ArcTrade
         {  
             try
             {
-                String _ConnectionString = ADO.conn_str;
-                SqlConnection conn = new SqlConnection(_ConnectionString);
+                SqlConnection conn = new SqlConnection(ADO.conn_str);
                 conn.Open();
+
                 SqlCommand cmd = conn.CreateCommand();
 
                 cmd.CommandText = "insert into applications " +

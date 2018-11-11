@@ -13,9 +13,23 @@ namespace ArcTrade.Controllers
     {
         // GET: api/Manage
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get()
         {
-            return new string[] { "value1", "value2" };
+            List<Application> applications = new List<Application>();
+            ApplicationService svc = new ApplicationService();
+            
+
+              List<int> applicants = svc.GenerateApplicants();
+                foreach (int applicant in applicants)
+                {
+                    Application application = svc.GenerateApplication(applicant);
+                    applications.Add(application);
+                }
+
+                return Ok(applications);
+            
+
+            
         }
 
         // GET: api/Manage/<userid>
