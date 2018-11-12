@@ -1,7 +1,8 @@
 # ArcTrade_Backend
 
-
 .NET Core Web API
+
+**Published to "arctrade.azurewebsites.net"
 
 # Configuring SQL
 Please go to the file "ADO.cs" and change the connection string.
