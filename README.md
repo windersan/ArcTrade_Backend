@@ -11,4 +11,4 @@ You should see:
 
     public static string conn_str = @"Data Source=.;Initial Catalog=dbdb;Integrated Security=True;";
   
-Change "conn_str" to match your system.  I use "localhost" and a database called "dbdb" so if you use "localhost", change the "Initial Catalog" to one of your databases.
+Change "conn_str" to match your system.  For the development server I use "localhost" and a database called "dbdb" so if you use "localhost", change the "Initial Catalog" to one of your databases.  
