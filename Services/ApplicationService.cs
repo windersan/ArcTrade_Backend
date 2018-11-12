@@ -10,35 +10,46 @@ namespace ArcTrade
     {
         public Application GenerateApplication(int id)
         {
+
             Application application = new Application();
 
-            SqlConnection conn = new SqlConnection(ADO.conn_str);
-            conn.Open();
-
-            SqlDataReader reader = null;
-
-            string SqlQuery = "select * from applications where UserId = '" + id + "'";
-            SqlCommand cmd = new SqlCommand(SqlQuery, conn);
-            reader = cmd.ExecuteReader();
-
-            while (reader.Read())
+            try
             {
-                application.Id = reader.GetInt32(reader.GetOrdinal("Id"));
-                application.UserId = reader.GetInt32(reader.GetOrdinal("UserId"));
-                application.ResumeId = reader.GetInt32(reader.GetOrdinal("ResumeId"));
-                application.Salary = reader.GetInt32(reader.GetOrdinal("Salary"));
-                application.FirstName = reader.GetString(reader.GetOrdinal("FirstName"));
-                application.LastName = reader.GetString(reader.GetOrdinal("LastName"));
-                application.Gender = reader.GetString(reader.GetOrdinal("Gender"));
-                application.DateApplied = reader.GetDateTime(reader.GetOrdinal("DateApplied"));
-                application.Job = reader.GetString(reader.GetOrdinal("Job"));
-                application.Address = reader.GetString(reader.GetOrdinal("Address"));
-                application.City = reader.GetString(reader.GetOrdinal("City"));
-                application.State = reader.GetString(reader.GetOrdinal("State"));
-                application.Zip = reader.GetInt32(reader.GetOrdinal("Zip"));
-            }
+                SqlConnection conn = new SqlConnection(ADO.conn_str);
+                conn.Open();
 
-            reader.Close();
+                SqlDataReader reader = null;
+
+                string SqlQuery = "select * from applications where UserId = '" + id + "'";
+                SqlCommand cmd = new SqlCommand(SqlQuery, conn);
+                reader = cmd.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    application.Id = reader.GetInt32(reader.GetOrdinal("Id"));
+                    application.UserId = reader.GetInt32(reader.GetOrdinal("UserId"));
+                    application.ResumeId = reader.GetInt32(reader.GetOrdinal("ResumeId"));
+                    application.Salary = reader.GetInt32(reader.GetOrdinal("Salary"));
+                    application.FirstName = reader.GetString(reader.GetOrdinal("FirstName"));
+                    application.LastName = reader.GetString(reader.GetOrdinal("LastName"));
+                    application.Gender = reader.GetString(reader.GetOrdinal("Gender"));
+                    application.DateApplied = reader.GetDateTime(reader.GetOrdinal("DateApplied"));
+                    application.Job = reader.GetString(reader.GetOrdinal("Job"));
+                    application.Address = reader.GetString(reader.GetOrdinal("Address"));
+                    application.City = reader.GetString(reader.GetOrdinal("City"));
+                    application.State = reader.GetString(reader.GetOrdinal("State"));
+                    application.Zip = reader.GetInt32(reader.GetOrdinal("Zip"));
+                    application.ApplicationStatus = reader.GetString(reader.GetOrdinal("ApplicationStatus"));
+                }
+
+                reader.Close();
+
+                conn.Close();
+            }
+            catch (SqlException ex)
+            {
+                string s = ex.Message.ToString();
+            }
 
             return application;
         }
@@ -62,6 +73,8 @@ namespace ArcTrade
 
             reader.Close();
 
+            conn.Close();
+
             return users;
         }
 
@@ -77,7 +90,7 @@ namespace ArcTrade
                 cmd.CommandText = "insert into applications " +
                                     "(userid, resumeid, salary, firstname, lastname, gender, dateapplied, job, address, city, state, zip) " +
                                     "values " +
-                                    "(@userid, @resumeid, @salary, @firstname, @lastname, @gender, @dateapplied, @job, @address, @city, @state, @zip)";
+                                    "(@userid, @resumeid, @salary, @firstname, @lastname, @gender, @dateapplied, @job, @address, @city, @state, @zip, @applicationstatus)";
 
                 cmd.Parameters.AddWithValue("@userid", application.UserId);
                 cmd.Parameters.AddWithValue("@resumeid", application.ResumeId); //frontend should initially set this to 1
@@ -91,6 +104,7 @@ namespace ArcTrade
                 cmd.Parameters.AddWithValue("@city", application.City);
                 cmd.Parameters.AddWithValue("@state", application.State);
                 cmd.Parameters.AddWithValue("@zip", application.Zip);
+                cmd.Parameters.AddWithValue("@applicationstatus", application.ApplicationStatus);
 
                 cmd.ExecuteNonQuery();
 

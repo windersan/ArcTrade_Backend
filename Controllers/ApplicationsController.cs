@@ -39,13 +39,13 @@ namespace ArcTrade.Controllers
 
         // POST api/<controller>
         [HttpPost]
-        public void Post([FromBody]Application application)
+        public IActionResult Post([FromBody]Application application)
         {
             ApplicationService svc = new ApplicationService();
 
             svc.Upload(application);
 
-            return;
+            return Ok(application);
         }
 
         // PUT api/<controller>/<userid>
