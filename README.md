@@ -3,6 +3,7 @@
 .NET Core Web API
 
 **Published to "arctrade.azurewebsites.net"
+See an example GET at http://arctrade.azurewebsites.net/api/manage
 
 # Configuring SQL
 Please go to the file "ADO.cs" and change the connection string.
