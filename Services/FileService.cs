@@ -12,6 +12,7 @@ namespace ArcTrade
     {
         public MemoryStream Download(int id)
         {
+            MemoryStream ms = new MemoryStream();
             SqlConnection conn = new SqlConnection(ADO.conn_str);
             conn.Open();
 
@@ -30,7 +31,14 @@ namespace ArcTrade
                 }
             }
 
-            MemoryStream ms = new MemoryStream(buffer);
+            try
+            {
+                ms = new MemoryStream(buffer);
+            }
+            catch (ArgumentException ex)
+            {
+                string s = ex.Message.ToString();
+            }
 
             conn.Close();
 

@@ -33,7 +33,7 @@ namespace ArcTrade
 
                 SqlDataReader reader = null;
 
-                string SqlQuery = "select id from applications where usernrame = '" + user.Login.Username + "'";
+                string SqlQuery = "select id from users where username = '" + user.Login.Username + "'";
                 cmd = new SqlCommand(SqlQuery, conn);
                 reader = cmd.ExecuteReader();
 
