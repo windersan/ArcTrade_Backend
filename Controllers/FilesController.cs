@@ -27,8 +27,15 @@ namespace ArcTrade.Controllers
         }
   
         [HttpGet]
-        public void Get()       
-        {        
+        public IActionResult Get()       
+        {
+            UploadedResume lastResume = new UploadedResume();
+            FileService svc = new FileService();
+
+            int last = svc.GetLast();
+            lastResume.Id = last;
+
+            return Ok(lastResume);
         }
 
         // POST: api/Files

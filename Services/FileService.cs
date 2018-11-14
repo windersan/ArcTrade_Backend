@@ -68,5 +68,28 @@ namespace ArcTrade
 
             return id;
         }
+
+        public int GetLast()
+        {
+            SqlConnection conn = new SqlConnection(ADO.conn_str);
+            conn.Open();
+
+            SqlCommand cmd = new SqlCommand("spGetLast", conn);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+            SqlParameter p = new SqlParameter();
+            p.ParameterName = "@identity";
+            p.DbType = DbType.Int32;
+            p.Direction = ParameterDirection.Output;
+            cmd.Parameters.Add(p);
+
+            cmd.ExecuteNonQuery();
+
+            int id = (int)cmd.Parameters["@identity"].Value;
+
+            conn.Close();
+
+            return id;
+        }
     }
 }

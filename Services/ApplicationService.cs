@@ -88,7 +88,7 @@ namespace ArcTrade
                 SqlCommand cmd = conn.CreateCommand();
 
                 cmd.CommandText = "insert into applications " +
-                                    "(userid, resumeid, salary, firstname, lastname, gender, dateapplied, job, address, city, state, zip) " +
+                                    "(userid, resumeid, salary, firstname, lastname, gender, dateapplied, job, address, city, state, zip, applicationstatus) " +
                                     "values " +
                                     "(@userid, @resumeid, @salary, @firstname, @lastname, @gender, @dateapplied, @job, @address, @city, @state, @zip, @applicationstatus)";
 

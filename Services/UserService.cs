@@ -8,6 +8,7 @@ namespace ArcTrade
 {
     public class UserService
     {
+
         public UploadedUser Upload(User user)
         {
             UploadedUser uploaded = new UploadedUser();

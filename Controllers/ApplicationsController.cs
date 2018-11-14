@@ -53,13 +53,17 @@ namespace ArcTrade.Controllers
         public void Put(int id, [FromBody] UploadedResume resume)
         {
             SqlConnection conn = new SqlConnection(ADO.conn_str);
-            conn.Open();
+            try
+            {
+                
+                conn.Open();
 
-            string SqlQuery = "update Applications set ResumeId = " + resume.Id + " where UserId = " + id;
-            SqlCommand cmd = new SqlCommand(SqlQuery, conn);
-            cmd.ExecuteNonQuery();
-
-            conn.Close();
+                string SqlQuery = "update Applications set ResumeId = " + resume.Id + " where UserId = " + id;
+                SqlCommand cmd = new SqlCommand(SqlQuery, conn);
+                cmd.ExecuteNonQuery();
+            }
+            catch (SqlException ex) { }
+            finally { conn.Close(); }
         }
 
         // DELETE api/<controller>/5
