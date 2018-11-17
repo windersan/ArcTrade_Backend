@@ -12,6 +12,7 @@ namespace ArcTrade.Controllers
     public class ManageController : ControllerBase
     {
         // GET: api/Manage
+        //Use this to skip over authentication and obtain the data from all applications
         [HttpGet]
         public IActionResult Get()
         {
@@ -33,6 +34,7 @@ namespace ArcTrade.Controllers
         }
 
         // GET: api/Manage/<userid>
+        //Use this to authenticate a manager and obtain the data from all applications
         [HttpGet("{userid}", Name = "Get")]
         public IActionResult Get(int userid)
         {

@@ -21,6 +21,7 @@ namespace ArcTrade
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+            .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseStartup<Startup>()
                  .UseUrls("http://localhost:1337");
     }
